@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./algovisual/static/css/main.13b7a241.css",
-    "main.js": "./algovisual/static/js/main.0aab90a6.js",
+    "main.js": "./algovisual/static/js/main.fa9413f7.js",
     "static/js/787.0d1937ff.chunk.js": "./algovisual/static/js/787.0d1937ff.chunk.js",
     "static/media/bg.jpg": "./algovisual/static/media/bg.971318c52485d1963a30.jpg",
     "static/media/arr-hover.svg": "./algovisual/static/media/arr-hover.a52854e0c00e33cd4d38.svg",
@@ -19,11 +19,11 @@
     "index.html": "./algovisual/index.html",
     "static/media/loader.svg": "./algovisual/static/media/loader.b935a8aeb021da7b2a90191a58ea95f4.svg",
     "main.13b7a241.css.map": "./algovisual/static/css/main.13b7a241.css.map",
-    "main.0aab90a6.js.map": "./algovisual/static/js/main.0aab90a6.js.map",
+    "main.fa9413f7.js.map": "./algovisual/static/js/main.fa9413f7.js.map",
     "787.0d1937ff.chunk.js.map": "./algovisual/static/js/787.0d1937ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.13b7a241.css",
-    "static/js/main.0aab90a6.js"
+    "static/js/main.fa9413f7.js"
   ]
 }
