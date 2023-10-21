@@ -75,8 +75,8 @@ export const StringComponent: React.FC = () => {
   return (
     <SolutionLayout title="Строка">
       <FlexForm onSubmit={onSubmit} extraClass="mb-40">
-        <Input maxLength={11} isLimitText={true} onChange={onChange} value={inputString} extraClass={`${styles.input} mr-6`} />
-        <Button text='Развернуть' isLoader={reverse.left < reverse.right ? true : false} disabled={inputString.length === 0} type='submit' />
+        <Input maxLength={11} isLimitText={true} onChange={onChange} value={inputString} extraClass={`${styles.input} mr-6`} data-testid="text-input"/>
+        <Button text='Развернуть' isLoader={reverse.left < reverse.right ? true : false} disabled={inputString.length === 0} type='submit' data-testid="submit-btn"/>
       </FlexForm>
       <div className={styles.circlesContainer} >
         {!!reverse?.str?.length && reverse.str.map((char, index) => {

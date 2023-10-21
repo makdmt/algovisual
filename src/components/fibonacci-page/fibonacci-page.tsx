@@ -51,8 +51,8 @@ export const FibonacciPage: React.FC = () => {
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
       <FlexForm onSubmit={onSubmit}>
-        <Input type='number' max={19} min={0} isLimitText={true} onChange={onChange} value={inputFibNum} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} />
-        <Button text='Рассчитать' isLoader={isLoading} disabled={inputFibNum < 0 || inputFibNum > 19} type='submit' />
+        <Input type='number' max={19} min={0} isLimitText={true} onChange={onChange} value={inputFibNum} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} data-testid="text-input"/>
+        <Button text='Рассчитать' isLoader={isLoading} disabled={inputFibNum < 0 || inputFibNum > 19 || Number.isNaN(inputFibNum)} type='submit' data-testid="submit-btn"/>
       </FlexForm>
       <div className={styles.circlesContainer} >
         {!!fibonacciArr?.length && fibonacciArr.map((fibVal, index) => {
