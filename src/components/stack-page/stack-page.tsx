@@ -58,12 +58,12 @@ export const StackPage: React.FC = () => {
   return (
     <SolutionLayout title="Стек">
       <FlexForm onSubmit={onSubmit} onReset={resetStack} extraClass={`mb-40`}>
-        <Input maxLength={4} isLimitText={true} onChange={onChange} value={inputString} placeholder='Введите значение'  extraClass={`${styles.input} mr-6`} />
-        <Button text='Добавить' isLoader={animationInProgress === 'push'} disabled={inputString.length === 0} type='submit' extraClass="mr-6" />
-        <Button text='Удалить' isLoader={animationInProgress === 'pop'} disabled={stackToRender.length === 0 || !!animationInProgress} onClick={popStack} type='button' extraClass="mr-40" />
-        <Button text='Очистить' isLoader={false} disabled={stackToRender.length === 0 || !!animationInProgress} type='reset' />
+        <Input maxLength={4} isLimitText={true} onChange={onChange} value={inputString} placeholder='Введите значение'  extraClass={`${styles.input} mr-6`} data-testid="text-input"/>
+        <Button text='Добавить' isLoader={animationInProgress === 'push'} disabled={inputString.length === 0} type='submit' extraClass="mr-6" data-testid="submit-btn"/>
+        <Button text='Удалить' isLoader={animationInProgress === 'pop'} disabled={stackToRender.length === 0 || !!animationInProgress} onClick={popStack} type='button' extraClass="mr-40" data-testid="delete-btn"/>
+        <Button text='Очистить' isLoader={false} disabled={stackToRender.length === 0 || !!animationInProgress} type='reset' data-testid="reset-btn"/>
       </FlexForm>
-      <div className={styles.circlesContainer} >
+      <div className={styles.circlesContainer} data-testid="circles-container">
         {!!stackToRender.length && stackToRender.map((str, index) => {
           return (<Circle key={index.toString() + str} letter={str} head={index === stackToRender.length - 1 ? 'top' : null} tail={index.toString()} state={index === stackElmHighlight ? ElementStates.Changing : ElementStates.Default} extraClass="mr-8" />)
         })}

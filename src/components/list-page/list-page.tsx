@@ -210,20 +210,20 @@ export const ListPage: React.FC = () => {
     <SolutionLayout title="Связный список">
       <form name='LinkedListForm' className="mb-40">
         <fieldset className={`${styles.fieldset} mb-6`}>
-          <Input maxLength={4} isLimitText={true} name={'nodeValue'} onChange={onChange} value={formValues.nodeValue} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} />
-          <Button text='Добавить в head' isLoader={animationInProgress === 'addHead'} disabled={!!animationInProgress || isAddBtnDisabled()} type='button' onClick={addHead} extraClass={`${styles.btn} mr-6`} />
-          <Button text='Добавить в tail' isLoader={animationInProgress === 'addTail'} disabled={!!animationInProgress ||isAddBtnDisabled()} type='button' onClick={addTail} extraClass={`${styles.btn} mr-6`} />
-          <Button text='Удалить из head' isLoader={animationInProgress === 'removeHead'} disabled={!!animationInProgress || isRemoveBtnDisabled()} type='button' onClick={removeHead} extraClass={`${styles.btn} mr-6`} />
-          <Button text='Удалить из tail' isLoader={animationInProgress === 'removeTail'} disabled={!!animationInProgress || isRemoveBtnDisabled()} type='button' onClick={removeTail} extraClass={`${styles.btn}`} />
+          <Input maxLength={4} isLimitText={true} name={'nodeValue'} onChange={onChange} value={formValues.nodeValue} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} data-testid="text-input"/>
+          <Button text='Добавить в head' isLoader={animationInProgress === 'addHead'} disabled={!!animationInProgress || isAddBtnDisabled()} type='button' onClick={addHead} extraClass={`${styles.btn} mr-6`} data-testid="add-head-btn"/>
+          <Button text='Добавить в tail' isLoader={animationInProgress === 'addTail'} disabled={!!animationInProgress ||isAddBtnDisabled()} type='button' onClick={addTail} extraClass={`${styles.btn} mr-6`} data-testid="add-tail-btn"/>
+          <Button text='Удалить из head' isLoader={animationInProgress === 'removeHead'} disabled={!!animationInProgress || isRemoveBtnDisabled()} type='button' onClick={removeHead} extraClass={`${styles.btn} mr-6`} data-testid="delete-head-btn"/>
+          <Button text='Удалить из tail' isLoader={animationInProgress === 'removeTail'} disabled={!!animationInProgress || isRemoveBtnDisabled()} type='button' onClick={removeTail} extraClass={`${styles.btn}`} data-testid="delete-tail-btn"/>
         </fieldset>
         <fieldset className={styles.fieldset}>
-          <Input type={'number'} name={'nodeIndex'} min={0} max={list.current.getSize() - 1} onChange={onChange} value={formValues.nodeIndex} placeholder='Введите индекс' extraClass={`${styles.input} mr-6`} />
-          <Button text='Добавить по индексу' isLoader={animationInProgress === 'addByIndex'} disabled={!!animationInProgress || isIndexBtnDisabled(formValues.nodeIndex) || isAddBtnDisabled()} type='button' onClick={addByIndex} extraClass={`${styles.wideBtn} mr-6`} />
-          <Button text='Удалить по индексу' isLoader={animationInProgress === 'removeByIndex'} disabled={!!animationInProgress || isIndexBtnDisabled(formValues.nodeIndex)} type='button' onClick={removeByIndex} extraClass={`${styles.wideBtn}`} />
+          <Input type={'number'} name={'nodeIndex'} min={0} max={list.current.getSize() - 1} onChange={onChange} value={formValues.nodeIndex} placeholder='Введите индекс' extraClass={`${styles.input} mr-6`} data-testid="index-input"/>
+          <Button text='Добавить по индексу' isLoader={animationInProgress === 'addByIndex'} disabled={!!animationInProgress || isIndexBtnDisabled(formValues.nodeIndex) || isAddBtnDisabled()} type='button' onClick={addByIndex} extraClass={`${styles.wideBtn} mr-6`} data-testid="add-index-btn"/>
+          <Button text='Удалить по индексу' isLoader={animationInProgress === 'removeByIndex'} disabled={!!animationInProgress || isIndexBtnDisabled(formValues.nodeIndex)} type='button' onClick={removeByIndex} extraClass={`${styles.wideBtn}`} data-testid="delete-index-btn"/>
         </fieldset>
       </form>
 
-      <ul className={styles.circlesContainer} >
+      <ul className={styles.circlesContainer} data-testid="circles-container">
         {!!listToRender.length && listToRender.map((str, index) => {
           return (
             <li key={index.toString() + str} className={styles.listElm}>

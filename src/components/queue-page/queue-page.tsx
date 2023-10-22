@@ -67,12 +67,12 @@ export const QueuePage: React.FC = () => {
   return (
     <SolutionLayout title="Очередь">
       <FlexForm onSubmit={onSubmit} onReset={eraseQueue} extraClass={`mb-40`}>
-        <Input maxLength={4} isLimitText={true} onChange={onChange} value={inputString} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} />
-        <Button text='Добавить' isLoader={animationInProgress === 'enqueue'} disabled={inputString.length === 0 || queue.current.head - queue.current.tail === 1 || (queue.current.head === 0 && queue.current.tail === queue.current.containerSize - 1) || !!animationInProgress} type='submit' extraClass="mr-6" />
-        <Button text='Удалить' isLoader={animationInProgress === 'dequeue'} disabled={queue.current.head < 0 || !!animationInProgress} onClick={dequeue} type='button' extraClass="mr-40" />
-        <Button text='Очистить' isLoader={false} disabled={!!animationInProgress || queue.current.head < 0} type='reset' />
+        <Input maxLength={4} isLimitText={true} onChange={onChange} value={inputString} placeholder='Введите значение' extraClass={`${styles.input} mr-6`} data-testid="text-input"/>
+        <Button text='Добавить' isLoader={animationInProgress === 'enqueue'} disabled={inputString.length === 0 || queue.current.head - queue.current.tail === 1 || (queue.current.head === 0 && queue.current.tail === queue.current.containerSize - 1) || !!animationInProgress} type='submit' extraClass="mr-6" data-testid="submit-btn"/>
+        <Button text='Удалить' isLoader={animationInProgress === 'dequeue'} disabled={queue.current.head < 0 || !!animationInProgress} onClick={dequeue} type='button' extraClass="mr-40" data-testid="delete-btn"/>
+        <Button text='Очистить' isLoader={false} disabled={!!animationInProgress || queue.current.head < 0} type='reset' data-testid="reset-btn"/>
       </FlexForm>
-      <div className={styles.circlesContainer} >
+      <div className={styles.circlesContainer} data-testid="circles-container">
         {!!queueToRender.length && queueToRender.map((str, index) => {
           return (<Circle key={index.toString() + str} letter={str?.toString()} head={getCircleFeatures(index)?.head} index={index} tail={getCircleFeatures(index)?.tail} state={getCircleFeatures(index)?.state} extraClass="mr-8" />)
         })}

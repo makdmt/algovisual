@@ -7,11 +7,12 @@ import { Direction } from "../../types/direction";
 import styles from './sorting-page.module.css'
 import { Column } from "../ui/column/column";
 import { ElementStates } from "../../types/element-states";
-import { wait, isLess, isMore } from "../../utils/utils";
+import { wait } from "../../utils/utils";
+import { bubleSort } from "../../utils/sorting_algoritms/buble-sorting";
+import { selectionSort } from "../../utils/sorting_algoritms/selection-sorting";
 
 type TSortMethod = 'select' | 'bubble'
-type TSortDirection = 'asc' | 'desc';
-type TExtremumType = 'min' | 'max';
+export type TSortDirection = 'asc' | 'desc';
 
 export const SortingPage: React.FC = () => {
 
@@ -37,74 +38,27 @@ export const SortingPage: React.FC = () => {
     setArr(resArr);
   }, [])
 
+  const animateSorting = async (left: number, right: number, sorted?: number) => {
+    setAnimatingArrElements({left, right, sorted})
+    await wait(500);
+  }
+
 
   const ascSortHandler = React.useCallback(async () => {
     setAnimationInProgress('asc');
-    if (sortMethod === 'bubble') await bubleSort(arr, 'asc');
-    if (sortMethod === 'select') await selectionSort(arr, 'asc');
+    if (sortMethod === 'bubble') await bubleSort(arr, 'asc', animateSorting);
+    if (sortMethod === 'select') await selectionSort(arr, 'asc', animateSorting);
     setAnimationInProgress(false);
   }, [arr, sortMethod])
   
 
   const descSortHandler = React.useCallback(async () => {
     setAnimationInProgress('desc');
-    if (sortMethod === 'bubble') await bubleSort(arr, 'desc');
-    if (sortMethod === 'select') await selectionSort(arr, 'desc');
+    if (sortMethod === 'bubble') await bubleSort(arr, 'desc', animateSorting);
+    if (sortMethod === 'select') await selectionSort(arr, 'desc', animateSorting);
     setAnimationInProgress(false);
   }, [arr, sortMethod])
 
-
-
-  const bubleSort = React.useCallback(async (arr: number[], sortDirection: TSortDirection): Promise<void> => {
-    const isNeedToChange = sortDirection === 'asc' ? isLess : isMore; 
-    
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < arr.length - 1 - i; j++) {
-        setAnimatingArrElements({left: j, right: j+1, sorted: arr.length - i})
-        await wait(500);
-        if (isNeedToChange(arr[j + 1], arr[j])) {
-          [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-        }
-      }
-    }
-    setArr([...arr]);
-  }, []);
-
-
-  const selectionSort = React.useCallback(async (arr: number[], sortDirection: TSortDirection): Promise<void> => {
-
-    const extremumType: TExtremumType = sortDirection === 'asc' ? 'min' : 'max';
-    let curIndex: number = 0;
-    let selectedIndex: number = 0;
-
-
-    while (curIndex < arr.length) {
-      selectedIndex = await findExtremum(arr, extremumType, curIndex, arr.length - 1);
-      [arr[curIndex], arr[selectedIndex]] = [arr[selectedIndex], arr[curIndex]];
-      setArr([...arr]);
-      curIndex++;
-    }
-
-    async function findExtremum(arr: number[], type: TExtremumType, startSearch: number = 0, endSearch: number = arr.length - 1): Promise<number> {
-
-      const isNewExtremum = (type === 'min') ? isLess : isMore;
-
-      let curIndex: number = startSearch;
-      let extremumIndex: number = startSearch;
-      let extremumValue: number = arr[extremumIndex];
-
-      while (curIndex <= endSearch) {
-        setAnimatingArrElements({ left: startSearch, right: curIndex })
-        await wait(500);
-        if (isNewExtremum(arr[curIndex], extremumValue)) {
-          extremumValue = arr[curIndex]
-          extremumIndex = curIndex;
-        }
-        curIndex++;
-      }
-      return extremumIndex;
-    }
-  }, []);
 
   const getElementState = React.useCallback((index: number) => {
     if (arr.length === 1) return ElementStates.Modified;
